@@ -17,11 +17,23 @@ type CoursBody = {
 };
 
 fastify.get("/cours", (r, reply) => {
-    const query = db.prepare("SELECT * FROM cours");
-    const cours = query.all();
+    const query = db.prepare(`
+    SELECT 
+      cours.id_cours,
+      cours.nom,
+      cours.description,
+      cours.niveau,
+      cours.max_participants,
+      COUNT(inscriptions.id_adherent) AS nb_inscrits
+    FROM cours
+    LEFT JOIN inscriptions 
+      ON cours.id_cours = inscriptions.id_cours
+    GROUP BY cours.id_cours
+  `);
 
-    reply.send(cours);
+  reply.send(query.all());
 });
+
 
 fastify.get("/cours/:id/adherents", (request, reply) => {
   const { id } = request.params as { id: string };
