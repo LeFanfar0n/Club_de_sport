@@ -59,7 +59,7 @@ async function chargerCours() {
   }
 
   activerBoutonsInscrits();
-} 
+}
 
 function activerBoutonsInscrits() {
   const boutons = document.querySelectorAll(".btn-inscrits");
@@ -86,3 +86,71 @@ async function afficherAdherentsDuCours(idCours: number) {
 }
 
 chargerCours();
+
+const inputAdherentNom = document.querySelector("#adherent-nom") as HTMLInputElement;
+const inputAdherentPrenom = document.querySelector("#adherent-prenom") as HTMLInputElement;
+const inputAdherentEmail = document.querySelector("#adherent-email") as HTMLInputElement;
+
+const inputInscriptionIdAdherent = document.querySelector("#inscription-id-adherent") as HTMLInputElement;
+const inputInscriptionIdCours = document.querySelector("#inscription-id-cours") as HTMLInputElement;
+
+const btnAjouterAdherent = document.querySelector("#btn-ajouter-adherent") as HTMLButtonElement;
+const btnInscrire = document.querySelector("#btn-inscrire") as HTMLButtonElement;
+
+
+async function ajouterAdherent() {
+  const nouvelAdherent = {
+    nom: inputAdherentNom.value,
+    prenom: inputAdherentPrenom.value,
+    email: inputAdherentEmail.value
+  };
+
+  const response = await fetch(`${API_URL}/adherents`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(nouvelAdherent)
+  });
+
+  if (!response.ok) {
+    alert("Erreur lors de la création de l'adhérent");
+    return;
+  }
+
+  inputAdherentNom.value = "";
+  inputAdherentPrenom.value = "";
+  inputAdherentEmail.value = "";
+
+  alert("Adhérent ajouté !");
+}
+
+async function inscrireAdherent() {
+  const inscription = {
+    id_adherent: Number(inputInscriptionIdAdherent.value),
+    id_cours: Number(inputInscriptionIdCours.value)
+  };
+
+  const response = await fetch(`${API_URL}/inscriptions`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(inscription)
+  });
+
+  if (!response.ok) {
+    alert("Inscription impossible : adhérent déjà inscrit ou inexistant");
+    return;
+  }
+
+  inputInscriptionIdAdherent.value = "";
+  inputInscriptionIdCours.value = "";
+
+  alert("Inscription réussie !");
+
+  chargerCours();
+}
+
+btnAjouterAdherent.addEventListener("click", ajouterAdherent);
+btnInscrire.addEventListener("click", inscrireAdherent);
