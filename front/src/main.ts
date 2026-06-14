@@ -37,6 +37,7 @@ async function chargerCours() {
 
     tableBody.innerHTML += `
       <tr>
+        <td>${unCours.id_cours}</td>
         <td>${unCours.nom}</td>
         <td>${unCours.description}</td>
         <td>
