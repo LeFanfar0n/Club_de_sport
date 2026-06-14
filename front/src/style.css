@@ -1,0 +1,68 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+  padding: 30px;
+}
+
+main {
+  max-width: 1000px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+th,
+td {
+  padding: 14px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #222;
+  color: white;
+}
+
+.places {
+  font-weight: bold;
+}
+
+/* Barre de niveau */
+.level {
+  display: flex;
+  gap: 6px;
+}
+
+.level span {
+  width: 35px;
+  height: 8px;
+  border: 1px dashed #555;
+  border-radius: 10px;
+}
+
+/* niveau 1 : une barre remplie */
+.level-1 span:nth-child(1) {
+  background-color: #276832;
+}
+
+/* niveau 2 : deux barres remplies */
+.level-2 span:nth-child(1),
+.level-2 span:nth-child(2) {
+  background-color: #be6c1e;
+}
+
+/* niveau 3 : trois barres remplies */
+.level-3 span:nth-child(1),
+.level-3 span:nth-child(2),
+.level-3 span:nth-child(3) {
+  background-color: #a10e0e;
+}
