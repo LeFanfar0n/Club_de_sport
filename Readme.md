@@ -93,7 +93,7 @@ npx nodemon .\dist\index.js
 
 ## 3. Configurer le frontend Vite
 
-Depuis la racine du projet et dans un autre terminal :
+Depuis la **racine** du projet et dans un autre terminal :
 
 ```bash
 cd ..
